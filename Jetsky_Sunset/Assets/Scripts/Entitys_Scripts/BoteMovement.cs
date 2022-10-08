@@ -24,7 +24,6 @@ public class BoteMovement : MonoBehaviour
         if(Input.GetAxis("Vertical") > 0)
         {
             speedInput = Input.GetAxis("Vertical") * forwardAccel * 50;
-            Debug.Log(speedInput);
         }
         else if (Input.GetAxis("Vertical") < 0)
         {
