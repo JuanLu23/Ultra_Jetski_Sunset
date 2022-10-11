@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class Check_Point_List_Manager : MonoBehaviour
 {
+    public Start_Line_Script m_startlineScript;
+
     public Transform[] checkPointsPositions;
 
     public Transform checkpointModel;
@@ -24,15 +26,22 @@ public class Check_Point_List_Manager : MonoBehaviour
 
     void ChangeCheckPointPosition()
     {
-        if (previusCP < (CPlistLength - 1))
+        previusCP += 1;
+        if (previusCP <= (CPlistLength - 1))
         {
-            previusCP += 1;
+            Checkpoint_Position_Rotation(previusCP);
         }
-        else
+        else if (previusCP == (CPlistLength))
         {
+            m_startlineScript.startlineActivate.Invoke();
             previusCP = 0;
+            Checkpoint_Position_Rotation(previusCP);
         }
-        checkpointModel.position = checkPointsPositions[previusCP].position;
-        checkpointModel.rotation = checkPointsPositions[previusCP].rotation;
+    }
+
+    void Checkpoint_Position_Rotation(int _previusCP)
+    {
+        checkpointModel.position = checkPointsPositions[_previusCP].position;
+        checkpointModel.rotation = checkPointsPositions[_previusCP].rotation;
     }
 }
