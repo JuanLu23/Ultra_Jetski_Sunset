@@ -8,6 +8,7 @@ public class Check_Point_List_Manager : MonoBehaviour
     public Start_Line_Script m_startlineScript;
 
     public Transform[] checkPointsPositions;
+    public Vector3 previousCheckPointPosition;
 
     public Transform checkpointModel;
 

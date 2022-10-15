@@ -16,6 +16,8 @@ public class Check_Point_Manager : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            Vector3 currentCheckPointPosition = this.transform.position;
+            m_cplManager.previousCheckPointPosition = currentCheckPointPosition;
             m_cplManager.playerCrossedCheckPoint.Invoke();
         }
     }

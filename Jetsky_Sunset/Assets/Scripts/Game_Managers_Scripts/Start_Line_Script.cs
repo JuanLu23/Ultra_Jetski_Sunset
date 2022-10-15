@@ -12,6 +12,10 @@ public class Start_Line_Script : MonoBehaviour
     public BoxCollider startlineCollider;
     public Game_Manager m_gameManager;
 
+    public Ocean_Manager m_oceanManager;
+
+    private bool b_playerPassedFinalCheckPoint;
+
     private void Start()
     {
         startlineActivate.AddListener(Activate_Start_Line);
@@ -21,19 +25,17 @@ public class Start_Line_Script : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            m_gameManager.increaseLap.Invoke();
-            Debug.Log("Start Line");
-            Deactivate_Start_Line();
+            if(b_playerPassedFinalCheckPoint == true)
+            {
+                m_oceanManager.changePattern.Invoke();
+                m_gameManager.increaseLap.Invoke();
+                b_playerPassedFinalCheckPoint = false;
+            }
         }
     }
 
     void Activate_Start_Line()
     {
-        startlineCollider.enabled = true;
-    }
-
-    void Deactivate_Start_Line()
-    {
-        startlineCollider.enabled = false;
+        b_playerPassedFinalCheckPoint = true;
     }
 }

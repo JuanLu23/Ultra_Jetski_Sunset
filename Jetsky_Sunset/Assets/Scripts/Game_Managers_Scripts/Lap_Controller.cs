@@ -12,6 +12,9 @@ public class Lap_Controller : MonoBehaviour
     
     void Update()
     {
-        m_lapText.text = m_GameManager.lapAmount.ToString();
+
+        string currentLap = m_GameManager.lapAmount.ToString();
+        string totalLap = m_GameManager.totalLapAmount.ToString();
+        m_lapText.text = currentLap + " / " + totalLap;
     }
 }

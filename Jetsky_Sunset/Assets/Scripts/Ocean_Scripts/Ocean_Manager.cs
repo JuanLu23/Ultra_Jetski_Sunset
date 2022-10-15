@@ -1,25 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Ocean_Manager : MonoBehaviour
 {
 
-    public float waveHeight = 0.5f;
+    private float waveHeight;
 
-    public float waveFrequency = 1f;
+    private float waveFrequency;
 
-    public float waveSpeed = 1f;
+    private float waveSpeed;
+
+    private int currentWavePattern = 0;
 
     public Transform _ocean;
+
+    public UnityEvent changePattern;
 
     Material _oceanMaterial;
     Texture2D _displacementWaves;
 
 
-    // Start is called before the first frame update
     void Start()
     {
+        changePattern.AddListener(Ocean_Behaviour_Pattern);
+        Ocean_Behaviour_Pattern();
         SetVariables();
     }
 
@@ -41,6 +47,39 @@ public class Ocean_Manager : MonoBehaviour
             SetVariables();
         }
         UpdateMaterial();
+    }
+
+    void Ocean_Behaviour_Pattern()
+    {
+        switch (currentWavePattern)
+        {
+            case 0:
+                waveHeight = 2f;
+                waveFrequency = 0.15f;
+                waveSpeed = 1f;
+                currentWavePattern += 1;
+                break;
+            case 1:
+                waveHeight = 3f;
+                waveFrequency = 0.3f;
+                waveSpeed = 1.5f;
+                currentWavePattern += 1;
+                break;
+            case 2:
+                waveHeight = 4f;
+                waveFrequency = 0.14f;
+                waveSpeed = 1.8f;
+                currentWavePattern += 1;
+                break;
+            case 3:
+                waveHeight = 5f;
+                waveFrequency = 0.2f;
+                waveSpeed = 2f;
+                currentWavePattern += 1;
+                break;
+        }
+        UpdateMaterial();
+
     }
 
     void UpdateMaterial()
