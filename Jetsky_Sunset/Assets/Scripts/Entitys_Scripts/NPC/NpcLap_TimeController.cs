@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class NpcLap_TimeController : MonoBehaviour
 {
-    public Start_Line_Script _start_Line_Script;
-    public int npcLaps;
-    public int maxNpcLaps, npcMinutes;
-    public float npcSeconds;
+    private HighScorePosition m_highScorePosition;
+    private int npcLaps, npcMinutes;
+    public int maxNpcLaps;
 
-    private float startTime;
-    private bool npcStopTimer;
+    private Vector2 v2_npcFinalScoreTime;
+    private float startTime, npcSeconds;
+    private bool npcStopTimer = false;
+    private bool sendFinalTime = false;
 
+    private void Start()
+    {
+        m_highScorePosition = GameObject.FindGameObjectWithTag("UIManager").GetComponent<HighScorePosition>();
+    }
 
     void Update()
     {
@@ -21,13 +26,24 @@ public class NpcLap_TimeController : MonoBehaviour
 
             npcMinutes = ((int)t / 60);
             npcSeconds = (t % 60);
-            string str_minutes = npcMinutes.ToString();
-            string str_seconds = npcSeconds.ToString("f2");
+        }
+        if(sendFinalTime == true && npcLaps == maxNpcLaps)
+        {
+            Debug.Log("What");
+            v2_npcFinalScoreTime.x = npcMinutes;
+            v2_npcFinalScoreTime.y = npcSeconds;
+            m_highScorePosition.Fill_Vector_With_Data(v2_npcFinalScoreTime);
+            sendFinalTime = false;
         }
     }
 
-    public void Stop_Timer()
+    public void NPC_Lap_Manager()
     {
-        npcStopTimer = true;
+        npcLaps += 1;
+        if (npcLaps == maxNpcLaps)
+        {
+            npcStopTimer = true;
+            sendFinalTime = true;
+        }
     }
 }

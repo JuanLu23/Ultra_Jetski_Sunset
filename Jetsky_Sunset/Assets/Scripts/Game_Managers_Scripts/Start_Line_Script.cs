@@ -10,7 +10,6 @@ public class Start_Line_Script : MonoBehaviour
 
     public BoxCollider startlineCollider;
     public Game_Manager m_gameManager;
-    public NpcLap_TimeController NpcLap_TimeController;
 
     public Ocean_Manager m_oceanManager;
 
@@ -22,9 +21,9 @@ public class Start_Line_Script : MonoBehaviour
         startlineActivate.AddListener(Activate_Start_Line);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider _collider)
     {
-        if(other.tag == "Player")
+        if(_collider.tag == "Player")
         {
             if(b_playerPassedFinalCheckPoint == true)
             {
@@ -33,13 +32,9 @@ public class Start_Line_Script : MonoBehaviour
                 b_playerPassedFinalCheckPoint = false;
             }
 
-        }else if (other.tag == "NpcRacer")
+        }else if (_collider.tag == "NpcRacer")
         {
-            if(b_NpcPassedFinalCheckPoint == true)
-            {
-                NpcLap_TimeController.npcLaps += 1;
-                //Esto se tiene conectar con una funcion.
-            }
+            _collider.gameObject.GetComponent<NpcLap_TimeController>().NPC_Lap_Manager();
         }
     }
 

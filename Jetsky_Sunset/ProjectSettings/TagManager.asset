@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NpcRacer
   - Waypoints
+  - UIManager
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WPACT : MonoBehaviour
 {
-    float speed = 30.0f;
+    public float speed = 5.0f;
 
     public Transform target;
     // Start is called before the first frame update
@@ -25,7 +25,6 @@ public class WPACT : MonoBehaviour
         {
             target = other.gameObject.GetComponent<Waypoints>().nextPoint;
             transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
-            Debug.Log("hola");
         }
     }
 
