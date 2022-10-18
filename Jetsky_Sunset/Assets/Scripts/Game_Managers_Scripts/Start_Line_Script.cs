@@ -5,16 +5,17 @@ using UnityEngine.Events;
 
 public class Start_Line_Script : MonoBehaviour
 {
-
     public UnityEvent startlineActivate;
     public UnityEvent startlineDeactivate;
 
     public BoxCollider startlineCollider;
     public Game_Manager m_gameManager;
+    public NpcLap_TimeController NpcLap_TimeController;
 
     public Ocean_Manager m_oceanManager;
 
     private bool b_playerPassedFinalCheckPoint;
+    private bool b_NpcPassedFinalCheckPoint;
 
     private void Start()
     {
@@ -30,6 +31,14 @@ public class Start_Line_Script : MonoBehaviour
                 m_oceanManager.changePattern.Invoke();
                 m_gameManager.increaseLap.Invoke();
                 b_playerPassedFinalCheckPoint = false;
+            }
+
+        }else if (other.tag == "NpcRacer")
+        {
+            if(b_NpcPassedFinalCheckPoint == true)
+            {
+                NpcLap_TimeController.npcLaps += 1;
+                //Esto se tiene conectar con una funcion.
             }
         }
     }
