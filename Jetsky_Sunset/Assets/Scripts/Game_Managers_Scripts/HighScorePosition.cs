@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HighScorePosition : MonoBehaviour
+public class HighScorePosition : MonoBehaviour, IDataPersistance
 {
     public TMP_Text[] highscoreFinalTimeText;
     private Vector2[] minutesAndSecondsContainer = new Vector2[4];
     public Canvas can_avtivateCanvas;
     public static int sizeVector2Array;
     private int i_contadorDeArrayTMP;
+
+    public void LoadData(GameData data)
+    {
+        
+    }
+
+    public void SaveData(ref GameData data) => data.v2_fastestTime = minutesAndSecondsContainer[0];
 
     void Start()
     {
@@ -40,6 +47,4 @@ public class HighScorePosition : MonoBehaviour
             highscoreFinalTimeText[i].text = str_minutos + ":" + str_seconds;
         }
     }
-
-    
 }

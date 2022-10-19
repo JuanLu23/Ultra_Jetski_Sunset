@@ -7,13 +7,14 @@ using UnityEngine.AI;
 public class NPC_Movement_Behaviour : MonoBehaviour
 {
     public Transform trans_npcFirstListWP;
-    public bool b_raceStarted = true;
+    public bool b_raceStarted;
     public float f_npcSpeed;
     private Transform trans_nextWayPoint;
     private NavMeshAgent nav_npcAgent;
 
     void Start()
     {
+        b_raceStarted = false;
         nav_npcAgent = GetComponent<NavMeshAgent>();
         nav_npcAgent.speed = f_npcSpeed;
     }

@@ -17,6 +17,8 @@ public class Timer_Controller : MonoBehaviour
 
     public UnityEvent saveLapTime;
 
+    public bool b_startTimer = false;
+
     private Vector2 v2_highScoreTime;
 
     private float startTime;
@@ -38,24 +40,27 @@ public class Timer_Controller : MonoBehaviour
 
     void Update()
     {
-        if(stopTimer == false)
+        if (b_startTimer == true)
         {
-            // Laps Timer calculatiosn 
-            lapSeconds += Time.deltaTime;
-            if(lapSeconds >= 60.0)
+            if (stopTimer == false)
             {
-                lapSeconds = 0.0f;
-                lapMinutes += 1;
+                // Laps Timer calculatiosn 
+                lapSeconds += Time.deltaTime;
+                if (lapSeconds >= 60.0)
+                {
+                    lapSeconds = 0.0f;
+                    lapMinutes += 1;
+                }
+                // Main Timer Calculatios
+                float t = Time.time - startTime;
+
+                minutes = ((int)t / 60);
+                seconds = (t % 60);
+                string str_minutes = minutes.ToString();
+                string str_seconds = seconds.ToString("f2");
+
+                timerText.text = str_minutes + ":" + str_seconds;
             }
-            // Main Timer Calculatios
-            float t = Time.time - startTime;
-
-            minutes = ((int)t / 60);
-            seconds = (t % 60);
-            string str_minutes = minutes.ToString();
-            string str_seconds = seconds.ToString("f2");
-
-            timerText.text = str_minutes + ":" + str_seconds;
         }
     }
 

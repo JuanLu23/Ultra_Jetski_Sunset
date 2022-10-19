@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public int deathCount;
+    public Vector2 v2_fastestTime;
 
     public GameData()
     {
-        this.deathCount = 0;
+        this.v2_fastestTime = Vector2.zero;
     }
 }

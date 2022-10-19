@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Buoyancy_Script : MonoBehaviour
 {
-    public Transform[] floaters;
+    private Transform floaters;
 
     public float underWaterDrag = 3f;
     public float underWaterAngularDrag = 1f;
@@ -24,6 +24,7 @@ public class Buoyancy_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        floaters = GetComponent<Transform>();
         m_Rigidbody = GetComponent<Rigidbody>();
         ocean_Manager = FindObjectOfType<Ocean_Manager>();
     }
@@ -32,6 +33,7 @@ public class Buoyancy_Script : MonoBehaviour
     void Update()
     {
         floatersUnderWater = 0;
+        /*
         for(int i = 0; i < floaters.Length; i++)
         {
             float difference = floaters[i].position.y - ocean_Manager.WaterHeightAtPosition(floaters[i].position);
@@ -47,6 +49,18 @@ public class Buoyancy_Script : MonoBehaviour
                 }
             }
 
+        }*/
+        float difference = floaters.position.y - ocean_Manager.WaterHeightAtPosition(floaters.position);
+
+        if (difference < 0)
+        {
+            m_Rigidbody.AddForceAtPosition(Vector3.up * floatingPower * Mathf.Abs(difference), floaters.position, ForceMode.Force);
+            floatersUnderWater += 1;
+            if (!underwater)
+            {
+                underwater = true;
+                SwitchState(true);
+            }
         }
 
         if (underwater && floatersUnderWater == 0)
