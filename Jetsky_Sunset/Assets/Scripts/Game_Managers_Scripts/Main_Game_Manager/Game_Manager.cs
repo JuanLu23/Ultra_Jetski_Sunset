@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-<<<<<<< Updated upstream
-=======
 using TMPro;
->>>>>>> Stashed changes
+
 
 public class Game_Manager : MonoBehaviour
 {
     public Timer_Controller m_timerController;
     public Check_Point_List_Manager m_checkpointlistManager;
     public TMP_Text tmp_startRaceTimerText;
-    public Canvas c_pauseMenu;
+    public GameObject c_pauseMenu;
 
     public int lapAmount;
     public int totalLapAmount;
@@ -31,7 +29,6 @@ public class Game_Manager : MonoBehaviour
         increaseLap.AddListener(Increase_Race_Lap);
         if (SceneManager.GetSceneByName("Escena_Principal_Carrera").isLoaded)
         {
-            c_pauseMenu = GetComponent<Canvas>();
             go_playerObject = GameObject.FindGameObjectWithTag("Player");
             go_npcObject = GameObject.FindGameObjectsWithTag("NpcRacer");
             b_startRaceCountdown = true;
@@ -76,27 +73,32 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
     public void ChangeScene()
     {
-        SceneManager.LoadScene("Escena_Principal_Carrera 1");
+        SceneManager.LoadScene("Escena_Principal_Carrera");
     }
 
     public void Exit()
     {
         Application.Quit();
-=======
+    }
+
     void Pause_Game()
     {
-        c_pauseMenu.enabled = true;
+        c_pauseMenu.SetActive(true);
         Time.timeScale = 0;
 
     }
 
     public void Resume_Game()
     {
-        c_pauseMenu.enabled = true;
+        c_pauseMenu.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void Return_To_Main_Menu()
+    {
+        SceneManager.LoadScene("Scene_Menu");
     }
 
     void Start_Race_Timer()
@@ -117,6 +119,5 @@ public class Game_Manager : MonoBehaviour
                 go_npcObject[i].GetComponent<NPC_Movement_Behaviour>().b_raceStarted = true;
             }
         }
->>>>>>> Stashed changes
     }
 }

@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class Ocean_Manager : MonoBehaviour
 {
 
-    private float waveHeight;
+    public float waveHeight;
 
-    private float waveFrequency;
+    public float waveFrequency;
 
-    private float waveSpeed;
+    public float waveSpeed;
 
-    private int currentWavePattern = 0;
+    private int currentWavePattern;
 
     public Transform _ocean;
 
@@ -24,6 +24,7 @@ public class Ocean_Manager : MonoBehaviour
 
     void Start()
     {
+        currentWavePattern = 0;
         changePattern.AddListener(Ocean_Behaviour_Pattern);
         Ocean_Behaviour_Pattern();
         SetVariables();
