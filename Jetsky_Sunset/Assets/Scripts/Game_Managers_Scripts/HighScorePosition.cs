@@ -7,12 +7,13 @@ public class HighScorePosition : MonoBehaviour
 {
     public TMP_Text[] highscoreFinalTimeText;
     private Vector2[] minutesAndSecondsContainer = new Vector2[4];
-
+    public Canvas can_avtivateCanvas;
     public static int sizeVector2Array;
     private int i_contadorDeArrayTMP;
 
     void Start()
     {
+        can_avtivateCanvas.enabled = false;
         i_contadorDeArrayTMP = 0;
     }
 
@@ -20,28 +21,25 @@ public class HighScorePosition : MonoBehaviour
     {
         if(i_contadorDeArrayTMP < highscoreFinalTimeText.Length)
         {
-            Debug.Log("Hey my time was saved");
-            Debug.Log(_finalTimes);
             minutesAndSecondsContainer[i_contadorDeArrayTMP] = _finalTimes;
             i_contadorDeArrayTMP++;
         }
-        if(i_contadorDeArrayTMP >= highscoreFinalTimeText.Length)
+        if(i_contadorDeArrayTMP == 4)
         {
+            can_avtivateCanvas.enabled = true;
             Vector_List_Organizer();
         }
     }
 
     private void Vector_List_Organizer()
     {
-        for (int i = 0; i < minutesAndSecondsContainer.Length; i++)
+        for (int i = 0; i < highscoreFinalTimeText.Length; i++)
         {
-            //bubble sort
+            string str_minutos = minutesAndSecondsContainer[i].x.ToString();
+            string str_seconds = minutesAndSecondsContainer[i].y.ToString("f2");
+            highscoreFinalTimeText[i].text = str_minutos + ":" + str_seconds;
         }
     }
 
-    /*
-    private void Vector_Array_Size()
-    {
-        Vector2[] minutesAndSecondsContainer = new Vector2[sizeVector2Array];
-    }*/
+    
 }

@@ -29,7 +29,6 @@ public class NpcLap_TimeController : MonoBehaviour
         }
         if(sendFinalTime == true && npcLaps == maxNpcLaps)
         {
-            Debug.Log("What");
             v2_npcFinalScoreTime.x = npcMinutes;
             v2_npcFinalScoreTime.y = npcSeconds;
             m_highScorePosition.Fill_Vector_With_Data(v2_npcFinalScoreTime);
