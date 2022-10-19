@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -36,5 +37,15 @@ public class Game_Manager : MonoBehaviour
         {
             _collider.gameObject.GetComponent<Transform>().position = m_checkpointlistManager.previousCheckPointPosition;
         }
+    }
+
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene("Escena_Principal_Carrera 1");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 }
